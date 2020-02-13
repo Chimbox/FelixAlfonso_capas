@@ -10,5 +10,5 @@ package capas;
  * @author lv1013
  */
 public class Barco {
-    
+    //pendiente
 }
