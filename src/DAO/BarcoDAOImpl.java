@@ -5,41 +5,43 @@
  */
 package DAO;
 
-import persistencia.ConnectionFactory;
-import negocio.Socio;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import negocio.Barco;
+import persistencia.ConnectionFactory;
 
 /**
  *
- * @author lv1013
+ * @author Invitado
  */
-public class SocioDAOImpl implements SocioDAO {
-
+public class BarcoDAOImpl implements BarcoDAO{
     private final ConnectionFactory CONNECTION_FACTORY;
+    private SocioDAOImpl socios;
 
-    public SocioDAOImpl(ConnectionFactory CONNECTION_FACTORY) {
+    public BarcoDAOImpl(ConnectionFactory CONNECTION_FACTORY) {
         this.CONNECTION_FACTORY = CONNECTION_FACTORY;
+        socios=new SocioDAOImpl(this.CONNECTION_FACTORY);
     }
 
     @Override
-    public Socio find(int id) throws Exception {
+    public Barco find(int num_matricula) throws Exception {
         final String SQL = "SELECT id, dni, nombre, direccion "
-                + "FROM socio WHERE id = ?";
+                + "FROM barco WHERE id = ?";
         try (Connection connection = this.CONNECTION_FACTORY.getConnection();
                 PreparedStatement statement = connection.prepareStatement(SQL);) {
             
-            statement.setInt(1, id);
+            statement.setInt(1, num_matricula);
 
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
-                    return new Socio(resultSet.getInt("id"),
-                            resultSet.getString("dni"),
+                    return new Barco(resultSet.getInt("num_matricula"),
                             resultSet.getString("nombre"),
-                            resultSet.getString("direccion"));
+                            resultSet.getShort("num_amarre"),
+                            resultSet.getDouble("cuota"),
+                            socios.find(resultSet.getInt("socio_id")));
                 }
                 return null;
             }
@@ -47,34 +49,39 @@ public class SocioDAOImpl implements SocioDAO {
     }
 
     @Override
-    public List<Socio> getAll() throws Exception {
-        List<Socio> lstSocios=new ArrayList<>();
-        final String SQL = "SELECT id, dni, nombre, direccion "
-                + "FROM socio";
+    public List<Barco> getAll() throws Exception {
+        List<Barco> lstBarcos=new ArrayList<>();
+        final String SQL = "SELECT num_matricula, nombre, num_amarre, cuota, socio_id "
+                + "FROM barco";
         try (Connection connection = this.CONNECTION_FACTORY.getConnection();
                 PreparedStatement statement = connection.prepareStatement(SQL);) {
 
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    lstSocios.add(new Socio(resultSet.getInt("id"),
-                            resultSet.getString("dni"),
+                    lstBarcos.add(new Barco(resultSet.getInt("num_matricula"),
                             resultSet.getString("nombre"),
-                            resultSet.getString("direccion")));
+                            resultSet.getShort("num_amarre"),
+                            resultSet.getDouble("cuota"),
+                            socios.find(resultSet.getInt("socio_id"))));
                 }
-                return lstSocios;
+                return lstBarcos;
             }
         }
     }
 
     @Override
-    public void add(Socio socio) throws Exception {
-        final String SQL = "INSERT INTO socio(dni, nombre, direccion) VALUES(?, ?, ?)";
+    public void add(Barco barco) throws Exception {
+        final String SQL = "INSERT INTO barco(num_matricula, nombre, num_amarre, cuota, socio_id) VALUES(?, ?, ?, ?, ?)";
         try (Connection connection = this.CONNECTION_FACTORY.getConnection();
                 PreparedStatement statement = connection.prepareStatement(SQL);) {
             
-            statement.setString(1, socio.getDni());
-            statement.setString(2, socio.getNombre());
-            statement.setString(3, socio.getDireccion());
+            System.out.println(barco);
+            
+            statement.setInt(1, barco.getNumMatricula());
+            statement.setString(2, barco.getNombre());
+            statement.setShort(3, barco.getNumAmarre());
+            statement.setDouble(4, barco.getCuota());
+            statement.setInt(5, barco.getSocio().getId());
             
             
             try{
@@ -86,15 +93,16 @@ public class SocioDAOImpl implements SocioDAO {
     }
 
     @Override
-    public void update(Socio socio) throws Exception {
-        final String SQL = "UPDATE socio SET dni=?, nombre=?, direccion=? WHERE id=?";
+    public void update(Barco barco) throws Exception {
+        final String SQL = "UPDATE barco SET nombre=?, num_amarre=?, cuota=?, socio_id=? WHERE num_matricula=?";
         try (Connection connection = this.CONNECTION_FACTORY.getConnection();
                 PreparedStatement statement = connection.prepareStatement(SQL);) {
             
-            statement.setString(1, socio.getDni());
-            statement.setString(2, socio.getNombre());
-            statement.setString(3, socio.getDireccion());
-            statement.setInt(4, socio.getId());
+            statement.setString(1, barco.getNombre());
+            statement.setShort(2, barco.getNumAmarre());
+            statement.setDouble(3, barco.getCuota());
+            statement.setInt(4, barco.getSocio().getId());
+            statement.setInt(5, barco.getNumMatricula());
             
             try{
                 statement.executeUpdate();
@@ -105,11 +113,11 @@ public class SocioDAOImpl implements SocioDAO {
     }
 
     @Override
-    public void delete(int id) throws Exception {
-        final String SQL = "DELETE FROM socio WHERE id=?";
+    public void delete(int num_matricula) throws Exception {
+        final String SQL = "DELETE FROM barco WHERE num_matricula=?";
         try (Connection connection = this.CONNECTION_FACTORY.getConnection();
                 PreparedStatement statement = connection.prepareStatement(SQL);) {
-            statement.setInt(1, id);
+            statement.setInt(1, num_matricula);
             
             try{
                 statement.executeUpdate();
@@ -119,4 +127,7 @@ public class SocioDAOImpl implements SocioDAO {
         }
     }
 
+    public ConnectionFactory getCONNECTION_FACTORY() {
+        return CONNECTION_FACTORY;
+    }   
 }

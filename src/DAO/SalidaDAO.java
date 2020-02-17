@@ -5,17 +5,17 @@
  */
 package DAO;
 
-import negocio.Socio;
 import java.util.List;
+import negocio.Salida;
 
 /**
  *
- * @author lv1013
+ * @author Invitado
  */
-public interface SocioDAO {
-    Socio find(int id) throws Exception;
-    List<Socio> getAll() throws Exception;
-    void add(Socio socio) throws Exception;
-    void update(Socio socio) throws Exception;
+public interface SalidaDAO {
+    Salida find(int id) throws Exception;
+    List<Salida> getAll() throws Exception;
+    void add(Salida salida) throws Exception;
+    void update(Salida salida) throws Exception;
     void delete(int id) throws Exception;
 }
