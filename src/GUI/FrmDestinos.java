@@ -5,43 +5,41 @@
  */
 package GUI;
 
-import DAO.SocioDAOImpl;
+import DAO.DestinoDAOImpl;
 import control.Modelos;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import negocio.Socio;
+import negocio.Destino;
 import persistencia.MySQLConnectionFactory;
 
 /**
  *
  * @author Invitado
  */
-public class FrmSocios extends javax.swing.JDialog{
+public class FrmDestinos extends javax.swing.JDialog{
 
-    SocioDAOImpl socioDao;
-    List<Socio> lstSocios;
-    Socio socioEdit;
+    DestinoDAOImpl destinoDao;
+    List<Destino> lstDestinos;
+    Destino destinoEdit;
     
     /**
-     * Creates new form FrmSocios
+     * Creates new form FrmDestinos
      */
-    public FrmSocios(java.awt.Frame parent) throws Exception{
+    public FrmDestinos(java.awt.Frame parent) throws Exception{
         super(parent);
         initComponents();
-        socioDao=new SocioDAOImpl(new MySQLConnectionFactory("localhost",
-        "club_nautico", 3306, "usuario", "1234"));
+        destinoDao=new DestinoDAOImpl(new MySQLConnectionFactory("localhost",
+        "club_nautico", 3306, "root", "1234"));
         centraCuadroDialogo(parent);
         updateTable();
         setVisible(true);
     }
     
     private void updateTable() throws Exception{
-        lstSocios=socioDao.getAll();
-        tblSocios.setModel(Modelos.socioTableModel(lstSocios));
+        lstDestinos=destinoDao.getAll();
+        tblDestinos.setModel(Modelos.destinoTableModel(lstDestinos));
     }
     
     private void centraCuadroDialogo(java.awt.Frame parent) {
@@ -68,25 +66,21 @@ public class FrmSocios extends javax.swing.JDialog{
         pnlDatos = new javax.swing.JPanel();
         lblId = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
-        lblDni = new javax.swing.JLabel();
-        txtDni = new javax.swing.JTextField();
         lblNombre = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
-        lblDireccion = new javax.swing.JLabel();
-        txtDireccion = new javax.swing.JTextField();
         btnLimpiar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         pnlTabla = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblSocios = new javax.swing.JTable();
+        tblDestinos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblTitulo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitulo.setText("Socios");
+        lblTitulo.setText("Destinos");
 
         lblId.setFont(new java.awt.Font("Consolas", 0, 22)); // NOI18N
         lblId.setText("ID");
@@ -94,20 +88,10 @@ public class FrmSocios extends javax.swing.JDialog{
         txtId.setEditable(false);
         txtId.setFont(new java.awt.Font("Consolas", 0, 22)); // NOI18N
 
-        lblDni.setFont(new java.awt.Font("Consolas", 0, 22)); // NOI18N
-        lblDni.setText("DNI");
-
-        txtDni.setFont(new java.awt.Font("Consolas", 0, 22)); // NOI18N
-
         lblNombre.setFont(new java.awt.Font("Consolas", 0, 22)); // NOI18N
         lblNombre.setText("Nombre");
 
         txtNombre.setFont(new java.awt.Font("Consolas", 0, 22)); // NOI18N
-
-        lblDireccion.setFont(new java.awt.Font("Consolas", 0, 22)); // NOI18N
-        lblDireccion.setText("Dirección");
-
-        txtDireccion.setFont(new java.awt.Font("Consolas", 0, 22)); // NOI18N
 
         btnLimpiar.setFont(new java.awt.Font("Yu Gothic Medium", 0, 18)); // NOI18N
         btnLimpiar.setText("Limpiar");
@@ -149,30 +133,24 @@ public class FrmSocios extends javax.swing.JDialog{
                 .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlDatosLayout.createSequentialGroup()
                         .addGap(25, 25, 25)
-                        .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblDni, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
-                            .addComponent(lblId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(86, 86, 86)
-                        .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 166, Short.MAX_VALUE))
                     .addGroup(pnlDatosLayout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pnlDatosLayout.createSequentialGroup()
                                 .addGap(8, 8, 8)
                                 .addComponent(btnLimpiar)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(33, 33, 33)
                         .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlDatosLayout.createSequentialGroup()
                                 .addComponent(btnGuardar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                                 .addComponent(btnCancelar))
                             .addComponent(txtNombre)
-                            .addComponent(txtDireccion)
                             .addGroup(pnlDatosLayout.createSequentialGroup()
                                 .addComponent(btnEliminar)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
@@ -181,22 +159,14 @@ public class FrmSocios extends javax.swing.JDialog{
         pnlDatosLayout.setVerticalGroup(
             pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDatosLayout.createSequentialGroup()
-                .addGap(55, 55, 55)
+                .addContainerGap()
                 .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblId)
                     .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDni)
-                    .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
-                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNombre)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
-                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDireccion)
-                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(49, 49, 49)
                 .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLimpiar)
@@ -204,26 +174,26 @@ public class FrmSocios extends javax.swing.JDialog{
                     .addComponent(btnCancelar))
                 .addGap(18, 18, 18)
                 .addComponent(btnEliminar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
-        tblSocios.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
-        tblSocios.setModel(new javax.swing.table.DefaultTableModel(
+        tblDestinos.setFont(new java.awt.Font("Open Sans", 0, 14)); // NOI18N
+        tblDestinos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "ID", "DNI", "Nombre", "Dirección"
+                "ID", "Nombre"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -234,22 +204,22 @@ public class FrmSocios extends javax.swing.JDialog{
                 return canEdit [columnIndex];
             }
         });
-        tblSocios.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblDestinos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblSociosMouseClicked(evt);
+                tblDestinosMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tblSocios);
+        jScrollPane1.setViewportView(tblDestinos);
 
         javax.swing.GroupLayout pnlTablaLayout = new javax.swing.GroupLayout(pnlTabla);
         pnlTabla.setLayout(pnlTablaLayout);
         pnlTablaLayout.setHorizontalGroup(
             pnlTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 719, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
         );
         pnlTablaLayout.setVerticalGroup(
             pnlTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -269,10 +239,8 @@ public class FrmSocios extends javax.swing.JDialog{
                 .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(pnlDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addComponent(pnlTabla, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(pnlTabla, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         pack();
@@ -280,9 +248,7 @@ public class FrmSocios extends javax.swing.JDialog{
 
     private void limpiarCampos(){
         txtId.setText("");
-        txtDni.setText("");
         txtNombre.setText("");
-        txtDireccion.setText("");
     }
     
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
@@ -291,13 +257,10 @@ public class FrmSocios extends javax.swing.JDialog{
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         if(txtId.getText().isEmpty()){
-            if(!txtDni.getText().isEmpty()&&
-                    !txtNombre.getText().isEmpty()&&
-                    !txtDireccion.getText().isEmpty()){
-                Socio socio=new Socio(txtDni.getText(), txtNombre.getText(), txtDireccion.getText());
-                
+            if(!txtNombre.getText().isEmpty()){
+                Destino destino=new Destino(txtNombre.getText());
                 try {
-                    socioDao.add(socio);
+                    destinoDao.add(destino);
                     updateTable();
                     limpiarCampos();
                 } catch (Exception ex) {
@@ -308,12 +271,10 @@ public class FrmSocios extends javax.swing.JDialog{
                 JOptionPane.showMessageDialog(this, "No puede dejar campos vacíos.");
             }
         }else{
-            if(socioEdit!=null){
+            if(destinoEdit!=null){
                 try {
-                    socioEdit.setNombre(txtNombre.getText());
-                    socioEdit.setDni(txtDni.getText());
-                    socioEdit.setDireccion(txtDireccion.getText());
-                    socioDao.update(socioEdit);
+                    destinoEdit.setNombre(txtNombre.getText());
+                    destinoDao.update(destinoEdit);
                     updateTable();
                 } catch (Exception ex) {
                    
@@ -331,9 +292,9 @@ public class FrmSocios extends javax.swing.JDialog{
         if(txtId.getText().isEmpty()){
             
         }else{
-            if(socioEdit!=null){
+            if(destinoEdit!=null){
                 try {
-                    socioDao.delete(socioEdit.getId());
+                    destinoDao.delete(destinoEdit.getId());
                     updateTable();
                     limpiarCampos();
                 } catch (Exception ex) {
@@ -344,16 +305,14 @@ public class FrmSocios extends javax.swing.JDialog{
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
-    private void tblSociosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSociosMouseClicked
-        int row=tblSocios.rowAtPoint(evt.getPoint());
+    private void tblDestinosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDestinosMouseClicked
+        int row=tblDestinos.rowAtPoint(evt.getPoint());
         
-        socioEdit=lstSocios.get(lstSocios.indexOf(new Socio((Integer)tblSocios.getValueAt(row, 0))));
+        destinoEdit=lstDestinos.get(lstDestinos.indexOf(new Destino((Integer)tblDestinos.getValueAt(row, 0))));
         
-        txtId.setText(String.valueOf(socioEdit.getId()));
-        txtDni.setText(socioEdit.getDni());
-        txtNombre.setText(socioEdit.getNombre());
-        txtDireccion.setText(socioEdit.getDireccion());
-    }//GEN-LAST:event_tblSociosMouseClicked
+        txtId.setText(String.valueOf(destinoEdit.getId()));
+        txtNombre.setText(destinoEdit.getNombre());
+    }//GEN-LAST:event_tblDestinosMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
@@ -361,16 +320,12 @@ public class FrmSocios extends javax.swing.JDialog{
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblDireccion;
-    private javax.swing.JLabel lblDni;
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel pnlDatos;
     private javax.swing.JPanel pnlTabla;
-    private javax.swing.JTable tblSocios;
-    private javax.swing.JTextField txtDireccion;
-    private javax.swing.JTextField txtDni;
+    private javax.swing.JTable tblDestinos;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables

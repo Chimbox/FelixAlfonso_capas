@@ -5,7 +5,7 @@
  */
 package negocio;
 
-import java.util.GregorianCalendar;
+import objetosServicio.Fecha;
 import java.util.Objects;
 
 /**
@@ -13,21 +13,44 @@ import java.util.Objects;
  * @author Invitado
  */
 public class Salida {
-    private GregorianCalendar fechaHora;
+    private int id;
+    private Fecha fechaHora;
     private Barco barco;
     private Destino destino;
 
-    public Salida(GregorianCalendar fechaHora, Barco barco, Destino destino) {
+    public Salida() {
+    }
+    
+    public Salida(int id) {
+        this.id = id;
+    }
+
+    public Salida(Fecha fechaHora, Barco barco, Destino destino) {
+        this.fechaHora = fechaHora;
+        this.barco = barco;
+        this.destino = destino;
+    }
+    
+    public Salida(int id, Fecha fechaHora, Barco barco, Destino destino) {
+        this.id=id;
         this.fechaHora = fechaHora;
         this.barco = barco;
         this.destino = destino;
     }
 
-    public GregorianCalendar getFechaHora() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Fecha getFechaHora() {
         return fechaHora;
     }
 
-    public void setFechaHora(GregorianCalendar fechaHora) {
+    public void setFechaHora(Fecha fechaHora) {
         this.fechaHora = fechaHora;
     }
 
@@ -66,7 +89,7 @@ public class Salida {
             return false;
         }
         final Salida other = (Salida) obj;
-        if (!Objects.equals(this.fechaHora, other.fechaHora)) {
+        if (this.id != other.id) {
             return false;
         }
         return true;

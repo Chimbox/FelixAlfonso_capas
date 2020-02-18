@@ -27,17 +27,17 @@ public class BarcoDAOImpl implements BarcoDAO{
     }
 
     @Override
-    public Barco find(int num_matricula) throws Exception {
-        final String SQL = "SELECT id, dni, nombre, direccion "
-                + "FROM barco WHERE id = ?";
+    public Barco find(int numMatricula) throws Exception {
+        final String SQL = "SELECT nombre, num_amarre, cuota, socio_id "
+                + "FROM barco WHERE num_matricula = ?";
         try (Connection connection = this.CONNECTION_FACTORY.getConnection();
                 PreparedStatement statement = connection.prepareStatement(SQL);) {
             
-            statement.setInt(1, num_matricula);
+            statement.setInt(1, numMatricula);
 
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
-                    return new Barco(resultSet.getInt("num_matricula"),
+                    return new Barco(numMatricula,
                             resultSet.getString("nombre"),
                             resultSet.getShort("num_amarre"),
                             resultSet.getDouble("cuota"),

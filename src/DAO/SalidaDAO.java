@@ -5,6 +5,7 @@
  */
 package DAO;
 
+import objetosServicio.Fecha;
 import java.util.List;
 import negocio.Salida;
 

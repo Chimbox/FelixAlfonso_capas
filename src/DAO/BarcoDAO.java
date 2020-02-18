@@ -13,7 +13,7 @@ import negocio.Barco;
  * @author Invitado
  */
 public interface BarcoDAO {
-    Barco find(int id) throws Exception;
+    Barco find(int numMatricula) throws Exception;
     List<Barco> getAll() throws Exception;
     void add(Barco barco) throws Exception;
     void update(Barco barco) throws Exception;

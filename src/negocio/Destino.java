@@ -13,6 +13,17 @@ public class Destino {
     private int id;
     private String nombre;
 
+    public Destino() {
+    }
+    
+    public Destino(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Destino(int id) {
+        this.id = id;
+    }
+    
     public Destino(int id, String nombre) {
         this.id = id;
         this.nombre = nombre;

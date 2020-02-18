@@ -5,12 +5,12 @@
  */
 package control;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import negocio.Barco;
+import negocio.Destino;
+import negocio.Salida;
 import negocio.Socio;
 
 /**
@@ -68,6 +68,55 @@ public class Modelos {
         return null;
     }
     
+    public static DefaultTableModel destinoTableModel(List<Destino> lstDestinos) {
+        Object tabla[][];
+        String[] nombresCols = {"ID", "Nombre"};
+        if(lstDestinos!=null){
+            DefaultTableModel modelo = new DefaultTableModel(){
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+            };
+            tabla=new Object[lstDestinos.size()][nombresCols.length];
+            
+            for (int i = 0; i < lstDestinos.size(); i++) {
+                Destino destino=lstDestinos.get(i);
+                tabla[i][0]=destino.getId();
+                tabla[i][1]=destino.getNombre();
+            }
+            modelo.setDataVector(tabla, nombresCols);
+            return modelo;
+        }
+        return null;
+    }
+    
+    public static DefaultTableModel salidaTableModel(List<Salida> lstSalidas) {
+        Object tabla[][];
+        String[] nombresCols = {"ID", "Fecha", "Hora", "Barco", "Destino"};
+        if(lstSalidas!=null){
+            DefaultTableModel modelo = new DefaultTableModel(){
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+            };
+            tabla=new Object[lstSalidas.size()][nombresCols.length];
+            
+            for (int i = 0; i < lstSalidas.size(); i++) {
+                Salida salida=lstSalidas.get(i);
+                tabla[i][0]=salida.getId();
+                tabla[i][1]=salida.getFechaHora();
+                tabla[i][2]=salida.getFechaHora().getCadenaHora();
+                tabla[i][3]=salida.getBarco();
+                tabla[i][4]=salida.getDestino();
+            }
+            modelo.setDataVector(tabla, nombresCols);
+            return modelo;
+        }
+        return null;
+    }
+    
     public static DefaultComboBoxModel sociosComboBoxModel(List<Socio> lstSocios) {
         DefaultComboBoxModel<Socio> comboSocio = new DefaultComboBoxModel<>();
         
@@ -79,6 +128,19 @@ public class Modelos {
         }
         return null;
     }
+    
+    public static DefaultComboBoxModel destinosComboBoxModel(List<Destino> lstDestinos) {
+        DefaultComboBoxModel<Destino> comboDestino = new DefaultComboBoxModel<>();
+        
+        if(lstDestinos!=null){
+            for (Destino destino : lstDestinos) {
+                comboDestino.addElement(destino);
+            }
+            return comboDestino;
+        }
+        return null;
+    }
+    
     
     public static DefaultComboBoxModel barcosComboBoxModel(List<Barco> lstBarcos) {
         DefaultComboBoxModel<Barco> comboBarco = new DefaultComboBoxModel<>();
