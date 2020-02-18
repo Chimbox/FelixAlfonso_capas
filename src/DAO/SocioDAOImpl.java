@@ -114,7 +114,7 @@ public class SocioDAOImpl implements SocioDAO {
             try{
                 statement.executeUpdate();
             }catch(Exception e){
-                System.out.println(e.getMessage());
+                throw e;
             }
         }
     }

@@ -342,7 +342,11 @@ public class FrmSocios extends javax.swing.JDialog{
                     updateTable();
                     limpiarCampos();
                 } catch (Exception ex) {
-                   
+                    if(ex.getMessage().contains("foreign key constraint fails")){
+                        JOptionPane.showMessageDialog(this, "No es posible"
+                                + " eliminar al socio ya que tiene barcos de "
+                                + "su propiedad.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
             

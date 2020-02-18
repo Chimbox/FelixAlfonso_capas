@@ -25,17 +25,17 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="lblTitulo" alignment="0" pref="608" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="146" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="btnSalidas" alignment="0" min="-2" pref="121" max="-2" attributes="0"/>
                   <Component id="btnBarcos" alignment="0" min="-2" pref="121" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnDestinos" min="-2" pref="121" max="-2" attributes="0"/>
                   <Component id="btnSocios" min="-2" pref="121" max="-2" attributes="0"/>
+                  <Component id="btnDestinos" min="-2" pref="121" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -44,7 +44,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
               <Component id="lblTitulo" min="-2" pref="65" max="-2" attributes="0"/>
-              <EmptySpace pref="49" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnSalidas" alignment="3" min="-2" pref="59" max="-2" attributes="0"/>
                   <Component id="btnSocios" alignment="3" min="-2" pref="59" max="-2" attributes="0"/>
@@ -54,7 +54,7 @@
                   <Component id="btnBarcos" alignment="3" min="-2" pref="59" max="-2" attributes="0"/>
                   <Component id="btnDestinos" alignment="3" min="-2" pref="59" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+              <EmptySpace pref="79" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

@@ -305,7 +305,9 @@ public class FrmDestinos extends javax.swing.JDialog{
                     updateTable();
                     limpiarCampos();
                 } catch (Exception ex) {
-                   
+                   JOptionPane.showMessageDialog(this, "No es posible"
+                                + " eliminar este destino ya que existen salidas al mismo.",
+                            "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
             

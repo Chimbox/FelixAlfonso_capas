@@ -122,7 +122,7 @@ public class BarcoDAOImpl implements BarcoDAO{
             try{
                 statement.executeUpdate();
             }catch(Exception e){
-                System.out.println(e.getMessage());
+                throw e;
             }
         }
     }

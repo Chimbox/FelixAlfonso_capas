@@ -381,7 +381,9 @@ public class FrmBarcos extends javax.swing.JDialog {
                     updateTable();
                     limpiarCampos();
                 } catch (Exception ex) {
-
+                    JOptionPane.showMessageDialog(this, "No es posible"
+                                + " eliminar este barco ya que tiene salidas registradas.",
+                            "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
 

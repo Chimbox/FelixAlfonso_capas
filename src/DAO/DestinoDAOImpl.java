@@ -104,7 +104,7 @@ public class DestinoDAOImpl implements DestinoDAO{
             try{
                 statement.executeUpdate();
             }catch(Exception e){
-                System.out.println(e.getMessage());
+                throw e;
             }
         }
     }
