@@ -32,11 +32,8 @@ public class FrmSocios extends javax.swing.JDialog{
     public FrmSocios(java.awt.Frame parent) throws Exception{
         super(parent);
         initComponents();
-        socioDao=new SocioDAOImpl(new MySQLConnectionFactory("localhost",
-        "club_nautico", 3306, "usuario", "1234"));
-        centraCuadroDialogo(parent);
-        updateTable();
         setVisible(true);
+        centraCuadroDialogo(parent);
     }
     
     private void updateTable() throws Exception{
@@ -83,6 +80,11 @@ public class FrmSocios extends javax.swing.JDialog{
         tblSocios = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         lblTitulo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -92,6 +94,7 @@ public class FrmSocios extends javax.swing.JDialog{
         lblId.setText("ID");
 
         txtId.setEditable(false);
+        txtId.setBackground(new java.awt.Color(255, 255, 204));
         txtId.setFont(new java.awt.Font("Consolas", 0, 22)); // NOI18N
 
         lblDni.setFont(new java.awt.Font("Consolas", 0, 22)); // NOI18N
@@ -118,7 +121,7 @@ public class FrmSocios extends javax.swing.JDialog{
         });
 
         btnGuardar.setFont(new java.awt.Font("Yu Gothic Medium", 0, 18)); // NOI18N
-        btnGuardar.setText("Guardar");
+        btnGuardar.setText("Agregar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
@@ -283,6 +286,7 @@ public class FrmSocios extends javax.swing.JDialog{
         txtDni.setText("");
         txtNombre.setText("");
         txtDireccion.setText("");
+        btnGuardar.setText("Agregar");
     }
     
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
@@ -353,7 +357,19 @@ public class FrmSocios extends javax.swing.JDialog{
         txtDni.setText(socioEdit.getDni());
         txtNombre.setText(socioEdit.getNombre());
         txtDireccion.setText(socioEdit.getDireccion());
+        
+        btnGuardar.setText("Actualizar");
     }//GEN-LAST:event_tblSociosMouseClicked
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        socioDao=new SocioDAOImpl(new MySQLConnectionFactory("localhost",
+        "club_nautico", 3306, "root", "1234"));
+        try {
+            updateTable();
+        } catch (Exception ex) {
+            
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;

@@ -2,17 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/FelixAlfonso_capas/src/GUI/FrmSalidas.java</file>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/FelixAlfonso_capas/src/GUI/FrmDestinos.java</file>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/FelixAlfonso_capas/src/DAO/SalidaDAOImpl.java</file>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/FelixAlfonso_capas/src/GUI/FrmBarcos.java</file>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/FelixAlfonso_capas/src/control/Modelos.java</file>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/FelixAlfonso_capas/src/negocio/Salida.java</file>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/FelixAlfonso_capas/src/GUI/Menu.java</file>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/FelixAlfonso_capas/src/DAO/BarcoDAO.java</file>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/FelixAlfonso_capas/src/negocio/Socio.java</file>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/FelixAlfonso_capas/src/DAO/DestinoDAOImpl.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

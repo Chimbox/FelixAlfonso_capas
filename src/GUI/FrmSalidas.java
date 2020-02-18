@@ -15,6 +15,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 import negocio.Barco;
@@ -41,17 +43,8 @@ public class FrmSalidas extends javax.swing.JDialog {
     public FrmSalidas(java.awt.Frame parent) throws Exception {
         super(parent);
         initComponents();
-        salidaDao = new SalidaDAOImpl(new MySQLConnectionFactory("localhost",
-                "club_nautico", 3306, "usuario", "1234"));
-        barcoDao = new BarcoDAOImpl(salidaDao.getCONNECTION_FACTORY());
-        destinoDao = new DestinoDAOImpl(salidaDao.getCONNECTION_FACTORY());
         centraCuadroDialogo(parent);
-        updateTable();
         setVisible(true);
-        spinnerHora.setModel(new SpinnerDateModel());
-        JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(spinnerHora, "HH:mm");
-        spinnerHora.setEditor(timeEditor);
-        spinnerHora.setValue(new Date());
     }
 
     private void updateTable() throws Exception {
@@ -102,6 +95,11 @@ public class FrmSalidas extends javax.swing.JDialog {
         tblSalidas = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         lblTitulo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -111,6 +109,7 @@ public class FrmSalidas extends javax.swing.JDialog {
         lblId.setText("Hora");
 
         txtId.setEditable(false);
+        txtId.setBackground(new java.awt.Color(255, 255, 204));
         txtId.setFont(new java.awt.Font("Consolas", 0, 22)); // NOI18N
 
         lblNombre.setFont(new java.awt.Font("Consolas", 0, 22)); // NOI18N
@@ -125,7 +124,7 @@ public class FrmSalidas extends javax.swing.JDialog {
         });
 
         btnGuardar.setFont(new java.awt.Font("Yu Gothic Medium", 0, 18)); // NOI18N
-        btnGuardar.setText("Guardar");
+        btnGuardar.setText("Agregar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
@@ -325,6 +324,7 @@ public class FrmSalidas extends javax.swing.JDialog {
         txtId.setText("");
         dtpFecha.setDate(new Date());
         spinnerHora.setValue(new Date());
+        btnGuardar.setText("Agregar");
     }
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
@@ -423,8 +423,25 @@ public class FrmSalidas extends javax.swing.JDialog {
         spinnerHora.setValue(salidaEdit.getFechaHora().getTime());
         cbxBarcos.setSelectedItem(salidaEdit.getBarco());
         cbxDestinos.setSelectedItem(salidaEdit.getDestino());
+        btnGuardar.setText("Actualizar");
 
     }//GEN-LAST:event_tblSalidasMouseClicked
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+       salidaDao = new SalidaDAOImpl(new MySQLConnectionFactory("localhost",
+                "club_nautico", 3306, "root", "1234"));
+        barcoDao = new BarcoDAOImpl(salidaDao.getCONNECTION_FACTORY());
+        destinoDao = new DestinoDAOImpl(salidaDao.getCONNECTION_FACTORY());
+        try {
+            updateTable();
+        } catch (Exception ex) {
+
+        }
+        spinnerHora.setModel(new SpinnerDateModel());
+        JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(spinnerHora, "HH:mm");
+        spinnerHora.setEditor(timeEditor);
+        spinnerHora.setValue(new Date());
+    }//GEN-LAST:event_formWindowOpened
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;

@@ -35,11 +35,7 @@ public class FrmBarcos extends javax.swing.JDialog {
     public FrmBarcos(java.awt.Frame parent) throws Exception {
         super(parent);
         initComponents();
-        barcoDao = new BarcoDAOImpl(new MySQLConnectionFactory("localhost",
-                "club_nautico", 3306, "usuario", "1234"));
-        socioDao = new SocioDAOImpl(barcoDao.getCONNECTION_FACTORY());
         centraCuadroDialogo(parent);
-        updateTable();
         setVisible(true);
     }
 
@@ -90,6 +86,11 @@ public class FrmBarcos extends javax.swing.JDialog {
         tblBarcos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         lblTitulo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -124,7 +125,7 @@ public class FrmBarcos extends javax.swing.JDialog {
         });
 
         btnGuardar.setFont(new java.awt.Font("Yu Gothic Medium", 0, 18)); // NOI18N
-        btnGuardar.setText("Guardar");
+        btnGuardar.setText("Agregar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
@@ -177,10 +178,9 @@ public class FrmBarcos extends javax.swing.JDialog {
                                         .addComponent(lblNumAmarre, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(38, 38, 38))
                                     .addGroup(pnlDatosLayout.createSequentialGroup()
-                                        .addComponent(lblCuota, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                                    .addGroup(pnlDatosLayout.createSequentialGroup()
-                                        .addComponent(lblSocio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblCuota, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(lblSocio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlDatosLayout.createSequentialGroup()
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -316,6 +316,7 @@ public class FrmBarcos extends javax.swing.JDialog {
         txtNumAmarre.setText("");
         txtCuota.setText("");
         txtNumMatricula.setEditable(true);
+        btnGuardar.setText("Agregar");
     }
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
@@ -397,7 +398,19 @@ public class FrmBarcos extends javax.swing.JDialog {
         txtNumAmarre.setText(String.valueOf(barcoEdit.getNumAmarre()));
         txtCuota.setText(String.valueOf((barcoEdit.getCuota())));
         cbxSocios.setSelectedItem(barcoEdit.getSocio());
+        btnGuardar.setText("Actualizar");
     }//GEN-LAST:event_tblBarcosMouseClicked
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        barcoDao = new BarcoDAOImpl(new MySQLConnectionFactory("localhost",
+                "club_nautico", 3306, "root", "1234"));
+        socioDao = new SocioDAOImpl(barcoDao.getCONNECTION_FACTORY());
+        try {
+            updateTable();
+        } catch (Exception ex) {
+
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;

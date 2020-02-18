@@ -10,6 +10,8 @@ import control.Modelos;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import negocio.Destino;
 import persistencia.MySQLConnectionFactory;
@@ -30,11 +32,8 @@ public class FrmDestinos extends javax.swing.JDialog{
     public FrmDestinos(java.awt.Frame parent) throws Exception{
         super(parent);
         initComponents();
-        destinoDao=new DestinoDAOImpl(new MySQLConnectionFactory("localhost",
-        "club_nautico", 3306, "root", "1234"));
-        centraCuadroDialogo(parent);
-        updateTable();
         setVisible(true);
+        centraCuadroDialogo(parent);
     }
     
     private void updateTable() throws Exception{
@@ -77,6 +76,11 @@ public class FrmDestinos extends javax.swing.JDialog{
         tblDestinos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         lblTitulo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -86,6 +90,7 @@ public class FrmDestinos extends javax.swing.JDialog{
         lblId.setText("ID");
 
         txtId.setEditable(false);
+        txtId.setBackground(new java.awt.Color(255, 255, 204));
         txtId.setFont(new java.awt.Font("Consolas", 0, 22)); // NOI18N
 
         lblNombre.setFont(new java.awt.Font("Consolas", 0, 22)); // NOI18N
@@ -102,7 +107,7 @@ public class FrmDestinos extends javax.swing.JDialog{
         });
 
         btnGuardar.setFont(new java.awt.Font("Yu Gothic Medium", 0, 18)); // NOI18N
-        btnGuardar.setText("Guardar");
+        btnGuardar.setText("Agregar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
@@ -249,6 +254,7 @@ public class FrmDestinos extends javax.swing.JDialog{
     private void limpiarCampos(){
         txtId.setText("");
         txtNombre.setText("");
+        btnGuardar.setText("Agregar");
     }
     
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
@@ -312,7 +318,20 @@ public class FrmDestinos extends javax.swing.JDialog{
         
         txtId.setText(String.valueOf(destinoEdit.getId()));
         txtNombre.setText(destinoEdit.getNombre());
+        
+        btnGuardar.setText("Actualizar");
     }//GEN-LAST:event_tblDestinosMouseClicked
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        destinoDao=new DestinoDAOImpl(new MySQLConnectionFactory("localhost",
+        "club_nautico", 3306, "root", "1234"));
+        
+        try {
+            updateTable();
+        } catch (Exception ex) {
+
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
