@@ -32,9 +32,10 @@ public class FrmBarcos extends javax.swing.JDialog {
     /**
      * Creates new form FrmSocios
      */
-    public FrmBarcos(java.awt.Frame parent) throws Exception {
+    public FrmBarcos(java.awt.Frame parent, MySQLConnectionFactory conexion) throws Exception {
         super(parent);
         initComponents();
+        barcoDao = new BarcoDAOImpl(conexion);
         centraCuadroDialogo(parent);
         setVisible(true);
     }
@@ -402,8 +403,6 @@ public class FrmBarcos extends javax.swing.JDialog {
     }//GEN-LAST:event_tblBarcosMouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        barcoDao = new BarcoDAOImpl(new MySQLConnectionFactory("localhost",
-                "club_nautico", 3306, "root", "1234"));
         socioDao = new SocioDAOImpl(barcoDao.getCONNECTION_FACTORY());
         try {
             updateTable();

@@ -40,9 +40,10 @@ public class FrmSalidas extends javax.swing.JDialog {
     /**
      * Creates new form FrmSalidas
      */
-    public FrmSalidas(java.awt.Frame parent) throws Exception {
+    public FrmSalidas(java.awt.Frame parent, MySQLConnectionFactory conexion) throws Exception {
         super(parent);
         initComponents();
+        salidaDao = new SalidaDAOImpl(conexion);
         centraCuadroDialogo(parent);
         setVisible(true);
     }
@@ -428,8 +429,6 @@ public class FrmSalidas extends javax.swing.JDialog {
     }//GEN-LAST:event_tblSalidasMouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-       salidaDao = new SalidaDAOImpl(new MySQLConnectionFactory("localhost",
-                "club_nautico", 3306, "root", "1234"));
         barcoDao = new BarcoDAOImpl(salidaDao.getCONNECTION_FACTORY());
         destinoDao = new DestinoDAOImpl(salidaDao.getCONNECTION_FACTORY());
         try {

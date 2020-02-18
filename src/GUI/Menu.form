@@ -23,19 +23,19 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="lblTitulo" alignment="0" max="32767" attributes="0"/>
+          <Component id="lblTitulo" alignment="0" pref="608" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="173" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="btnDestinos" max="32767" attributes="0"/>
-                  <Component id="btnSocios" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="146" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="btnSalidas" alignment="0" min="-2" pref="121" max="-2" attributes="0"/>
+                  <Component id="btnBarcos" alignment="0" min="-2" pref="121" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="btnBarcos" max="32767" attributes="0"/>
-                  <Component id="btnSalidas" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="btnDestinos" min="-2" pref="121" max="-2" attributes="0"/>
+                  <Component id="btnSocios" min="-2" pref="121" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="185" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -43,18 +43,18 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-              <Component id="lblTitulo" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+              <Component id="lblTitulo" min="-2" pref="65" max="-2" attributes="0"/>
+              <EmptySpace pref="49" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnSocios" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnBarcos" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnSalidas" alignment="3" min="-2" pref="59" max="-2" attributes="0"/>
+                  <Component id="btnSocios" alignment="3" min="-2" pref="59" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnDestinos" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnSalidas" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnBarcos" alignment="3" min="-2" pref="59" max="-2" attributes="0"/>
+                  <Component id="btnDestinos" alignment="3" min="-2" pref="59" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="89" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -63,7 +63,7 @@
     <Component class="javax.swing.JLabel" name="lblTitulo">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Rockwell" size="24" style="0"/>
+          <Font name="Perpetua Titling MT" size="36" style="0"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="Club n&#xe1;utico"/>
@@ -72,7 +72,7 @@
     <Component class="javax.swing.JButton" name="btnSocios">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="18" style="0"/>
+          <Font name="Segoe UI Semilight" size="24" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Socios"/>
       </Properties>
@@ -83,7 +83,7 @@
     <Component class="javax.swing.JButton" name="btnBarcos">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="18" style="0"/>
+          <Font name="Segoe UI Semilight" size="24" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Barcos"/>
       </Properties>
@@ -94,7 +94,7 @@
     <Component class="javax.swing.JButton" name="btnDestinos">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="18" style="0"/>
+          <Font name="Segoe UI Semilight" size="24" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Destinos"/>
       </Properties>
@@ -105,7 +105,7 @@
     <Component class="javax.swing.JButton" name="btnSalidas">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="18" style="0"/>
+          <Font name="Segoe UI Semilight" size="24" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Salidas"/>
       </Properties>

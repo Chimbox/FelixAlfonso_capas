@@ -8,6 +8,7 @@ package GUI;
 import java.awt.Dimension;
 import java.awt.Point;
 import javax.swing.JOptionPane;
+import persistencia.MySQLConnectionFactory;
 
 /**
  *
@@ -15,12 +16,16 @@ import javax.swing.JOptionPane;
  */
 public class Menu extends javax.swing.JFrame {
 
+    private final MySQLConnectionFactory conexion;
+    
     /**
      * Creates new form Menu
      */
     public Menu() {
         initComponents();
         this.setLocationRelativeTo(null);
+        conexion=new MySQLConnectionFactory("localhost",
+        "club_nautico", 3306, "root", "1234");
     }
 
     /**
@@ -40,11 +45,11 @@ public class Menu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblTitulo.setFont(new java.awt.Font("Rockwell", 0, 24)); // NOI18N
+        lblTitulo.setFont(new java.awt.Font("Perpetua Titling MT", 0, 36)); // NOI18N
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setText("Club náutico");
 
-        btnSocios.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnSocios.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
         btnSocios.setText("Socios");
         btnSocios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -52,7 +57,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        btnBarcos.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnBarcos.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
         btnBarcos.setText("Barcos");
         btnBarcos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -60,7 +65,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        btnDestinos.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnDestinos.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
         btnDestinos.setText("Destinos");
         btnDestinos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -68,7 +73,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        btnSalidas.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnSalidas.setFont(new java.awt.Font("Segoe UI Semilight", 0, 24)); // NOI18N
         btnSalidas.setText("Salidas");
         btnSalidas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,32 +85,32 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(173, 173, 173)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnDestinos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSocios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(64, 64, 64)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnBarcos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSalidas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(185, Short.MAX_VALUE))
+                .addGap(146, 146, 146)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnSalidas, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBarcos, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(77, 77, 77)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnDestinos, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSocios, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addComponent(lblTitulo)
-                .addGap(58, 58, 58)
+                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSocios)
-                    .addComponent(btnBarcos))
-                .addGap(86, 86, 86)
+                    .addComponent(btnSalidas, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSocios, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDestinos)
-                    .addComponent(btnSalidas))
-                .addContainerGap(89, Short.MAX_VALUE))
+                    .addComponent(btnBarcos, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDestinos, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(63, 63, 63))
         );
 
         pack();
@@ -113,7 +118,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnSociosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSociosActionPerformed
         try{
-            new FrmSocios(this);
+            new FrmSocios(this, conexion);
         }catch(Exception e){
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
@@ -121,7 +126,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnBarcosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBarcosActionPerformed
         try{
-            new FrmBarcos(this);
+            new FrmBarcos(this, conexion);
         }catch(Exception e){
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
@@ -129,7 +134,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnDestinosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDestinosActionPerformed
         try{
-            new FrmDestinos(this);
+            new FrmDestinos(this, conexion);
         }catch(Exception e){
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
@@ -137,7 +142,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnSalidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalidasActionPerformed
         try{
-            new FrmSalidas(this);
+            new FrmSalidas(this, conexion);
         }catch(Exception e){
             JOptionPane.showMessageDialog(this, e.getMessage());
         }

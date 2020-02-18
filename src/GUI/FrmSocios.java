@@ -29,9 +29,10 @@ public class FrmSocios extends javax.swing.JDialog{
     /**
      * Creates new form FrmSocios
      */
-    public FrmSocios(java.awt.Frame parent) throws Exception{
+    public FrmSocios(java.awt.Frame parent, MySQLConnectionFactory conexion) throws Exception{
         super(parent);
         initComponents();
+        socioDao=new SocioDAOImpl(conexion);
         setVisible(true);
         centraCuadroDialogo(parent);
     }
@@ -362,9 +363,7 @@ public class FrmSocios extends javax.swing.JDialog{
     }//GEN-LAST:event_tblSociosMouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        socioDao=new SocioDAOImpl(new MySQLConnectionFactory("localhost",
-        "club_nautico", 3306, "root", "1234"));
-        try {
+         try {
             updateTable();
         } catch (Exception ex) {
             
