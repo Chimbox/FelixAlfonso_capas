@@ -85,6 +85,39 @@ public class SalidaDAOImpl implements SalidaDAO{
         }
     }
 
+    public List<Salida> getAllWith(String referencia) throws Exception {
+        List<Salida> lstSalidas=new ArrayList<>();
+        
+        final String SQL = "SELECT s.id, s.fecha_hora, s.barco_num_matricula, "
+                + "s.destino_id FROM salida s INNER JOIN barco b "
+                + "ON b.num_matricula=s.barco_num_matricula INNER JOIN destino d "
+                + "ON d.id=s.destino_id WHERE b.nombre LIKE ? OR d.nombre LIKE ?";
+        try (Connection connection = this.CONNECTION_FACTORY.getConnection();
+                PreparedStatement statement = connection.prepareStatement(SQL);) {
+            statement.setString(1, "%"+referencia+"%");
+            statement.setString(2, "%"+referencia+"%");
+            
+            System.out.println(SQL);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                
+                while (resultSet.next()) {
+                    String strFecha=resultSet.getString("fecha_hora");
+                    String strHora=strFecha.split(" ")[1];
+                    
+                    Fecha fecha=new Fecha(strFecha.split(" ")[0]);
+                    fecha.setHora(Integer.parseInt(strHora.split(":")[0]));
+                    fecha.setMinuto(Integer.parseInt(strHora.split(":")[1]));
+                    
+                    lstSalidas.add(new Salida(resultSet.getInt("id"),
+                            fecha, 
+                            barcos.find(resultSet.getInt("barco_num_matricula")),
+                            destinos.find(resultSet.getInt("destino_id"))));
+                }
+                return lstSalidas;
+            }
+        }
+    }
+    
     @Override
     public void add(Salida salida) throws Exception {
         final String SQL = "INSERT INTO salida(fecha_hora, barco_num_matricula, destino_id) VALUES(?, ?, ?)";

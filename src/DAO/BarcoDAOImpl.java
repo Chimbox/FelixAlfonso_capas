@@ -68,6 +68,27 @@ public class BarcoDAOImpl implements BarcoDAO{
             }
         }
     }
+    
+    @Override
+    public List<Barco> getAllWith(String referencia) throws Exception {
+        List<Barco> lstBarcos=new ArrayList<>();
+        final String SQL = "SELECT num_matricula, nombre, num_amarre, cuota, socio_id "
+                + "FROM barco WHERE nombre LIKE ?";
+        try (Connection connection = this.CONNECTION_FACTORY.getConnection();
+                PreparedStatement statement = connection.prepareStatement(SQL);) {
+            statement.setString(1, "%"+referencia+"%");
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    lstBarcos.add(new Barco(resultSet.getInt("num_matricula"),
+                            resultSet.getString("nombre"),
+                            resultSet.getShort("num_amarre"),
+                            resultSet.getDouble("cuota"),
+                            socios.find(resultSet.getInt("socio_id"))));
+                }
+                return lstBarcos;
+            }
+        }
+    }
 
     @Override
     public void add(Barco barco) throws Exception {

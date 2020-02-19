@@ -58,6 +58,23 @@ public class DestinoDAOImpl implements DestinoDAO{
             }
         }
     }
+    
+    @Override
+    public List<Destino> getAllWith(String referencia) throws Exception {
+        List<Destino> lstDestinos=new ArrayList<>();
+        final String SQL = "SELECT id, nombre FROM destino WHERE nombre LIKE ?";
+        try (Connection connection = this.CONNECTION_FACTORY.getConnection();
+                PreparedStatement statement = connection.prepareStatement(SQL);) {
+            statement.setString(1, "%"+referencia+"%");
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    lstDestinos.add(new Destino(resultSet.getInt("id"),
+                            resultSet.getString("nombre")));
+                }
+                return lstDestinos;
+            }
+        }
+    }
 
     @Override
     public void add(Destino destino) throws Exception {

@@ -6,6 +6,7 @@
 package GUI;
 
 import DAO.SocioDAOImpl;
+import com.sun.glass.events.KeyEvent;
 import control.Modelos;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -39,6 +40,11 @@ public class FrmSocios extends javax.swing.JDialog{
     
     private void updateTable() throws Exception{
         lstSocios=socioDao.getAll();
+        tblSocios.setModel(Modelos.socioTableModel(lstSocios));
+    }
+    
+    private void updateTableBusqueda() throws Exception{
+        lstSocios=socioDao.getAllWith(txtBusqueda.getText());
         tblSocios.setModel(Modelos.socioTableModel(lstSocios));
     }
     
@@ -79,6 +85,8 @@ public class FrmSocios extends javax.swing.JDialog{
         pnlTabla = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblSocios = new javax.swing.JTable();
+        txtBusqueda = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -245,15 +253,42 @@ public class FrmSocios extends javax.swing.JDialog{
         });
         jScrollPane1.setViewportView(tblSocios);
 
+        txtBusqueda.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
+        txtBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtBusquedaKeyPressed(evt);
+            }
+        });
+
+        btnBuscar.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlTablaLayout = new javax.swing.GroupLayout(pnlTabla);
         pnlTabla.setLayout(pnlTablaLayout);
         pnlTablaLayout.setHorizontalGroup(
             pnlTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 719, Short.MAX_VALUE)
+            .addGroup(pnlTablaLayout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(btnBuscar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlTablaLayout.setVerticalGroup(
             pnlTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTablaLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -287,7 +322,13 @@ public class FrmSocios extends javax.swing.JDialog{
         txtDni.setText("");
         txtNombre.setText("");
         txtDireccion.setText("");
+        txtBusqueda.setText("");
         btnGuardar.setText("Agregar");
+        try {
+            updateTable();
+        } catch (Exception ex) {
+            
+        }
     }
     
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
@@ -374,7 +415,26 @@ public class FrmSocios extends javax.swing.JDialog{
         }
     }//GEN-LAST:event_formWindowOpened
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        try {
+            updateTableBusqueda();
+        } catch (Exception ex) {
+            
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void txtBusquedaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            try{
+                updateTableBusqueda();
+            }catch(Exception e){
+                
+            }
+        }
+    }//GEN-LAST:event_txtBusquedaKeyPressed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
@@ -388,6 +448,7 @@ public class FrmSocios extends javax.swing.JDialog{
     private javax.swing.JPanel pnlDatos;
     private javax.swing.JPanel pnlTabla;
     private javax.swing.JTable tblSocios;
+    private javax.swing.JTextField txtBusqueda;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtDni;
     private javax.swing.JTextField txtId;

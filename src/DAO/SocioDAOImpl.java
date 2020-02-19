@@ -65,6 +65,26 @@ public class SocioDAOImpl implements SocioDAO {
             }
         }
     }
+    
+    @Override
+    public List<Socio> getAllWith(String referencia) throws Exception {
+        List<Socio> lstSocios=new ArrayList<>();
+        final String SQL = "SELECT id, dni, nombre, direccion "
+                + "FROM socio WHERE nombre LIKE ?";
+        try (Connection connection = this.CONNECTION_FACTORY.getConnection();
+                PreparedStatement statement = connection.prepareStatement(SQL);) {
+            statement.setString(1, "%"+referencia+"%");
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    lstSocios.add(new Socio(resultSet.getInt("id"),
+                            resultSet.getString("dni"),
+                            resultSet.getString("nombre"),
+                            resultSet.getString("direccion")));
+                }
+                return lstSocios;
+            }
+        }
+    }
 
     @Override
     public void add(Socio socio) throws Exception {

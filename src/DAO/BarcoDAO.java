@@ -15,6 +15,7 @@ import negocio.Barco;
 public interface BarcoDAO {
     Barco find(int numMatricula) throws Exception;
     List<Barco> getAll() throws Exception;
+    List<Barco> getAllWith(String referencia) throws Exception;
     void add(Barco barco) throws Exception;
     void update(Barco barco) throws Exception;
     void delete(int id) throws Exception;

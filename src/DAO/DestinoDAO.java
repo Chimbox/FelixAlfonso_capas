@@ -15,6 +15,7 @@ import negocio.Destino;
 public interface DestinoDAO {
     Destino find(int id) throws Exception;
     List<Destino> getAll() throws Exception;
+    List<Destino> getAllWith(String referencia) throws Exception;
     void add(Destino destino) throws Exception;
     void update(Destino destino) throws Exception;
     void delete(int id) throws Exception;
