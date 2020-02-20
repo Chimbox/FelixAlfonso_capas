@@ -5,11 +5,13 @@
  */
 package DAO;
 
+import java.sql.CallableStatement;
 import persistencia.ConnectionFactory;
 import negocio.Socio;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -135,6 +137,25 @@ public class SocioDAOImpl implements SocioDAO {
                 statement.executeUpdate();
             }catch(Exception e){
                 throw e;
+            }
+        }
+    }
+    
+    public int updateNumBarcos(int socioId) throws Exception{
+        final String SQL = "CALL actualizarNumBarcos(?)";
+        
+        try (Connection connection = this.CONNECTION_FACTORY.getConnection();
+                CallableStatement statement = connection.prepareCall(SQL);) {
+            
+            statement.setInt(2, socioId);
+            // statement.registerOutParameter(2, Types.INTEGER);
+            
+            
+            try (ResultSet resultSet = statement.executeQuery()) {
+               //  int outParameter = statement.getInt(2);
+                if(resultSet.next()){
+                    return resultSet.getInt(1);
+                }
             }
         }
     }
